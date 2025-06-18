@@ -1,4 +1,5 @@
 class AppAssets {
+  static const String welcomeImage = "assets/images/welcome.png";
   static const String logoImageSvg = "assets/images/logo.svg";
   static const String appIconImage = "assets/images/book.png";
   static const String successMarIkImageSvg = "assets/images/Successmark.svg";

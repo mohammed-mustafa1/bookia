@@ -8,10 +8,9 @@ class TextStyles {
     double? fontSize,
   }) {
     return TextStyle(
-      fontSize: fontSize ?? 30,
-      fontWeight: fontWeight ?? FontWeight.normal,
-      color: color ?? AppColors.darkColor,
-    );
+        fontSize: fontSize ?? 30,
+        fontWeight: fontWeight ?? FontWeight.normal,
+        color: color);
   }
 
   static TextStyle getHeadLine2({
@@ -20,10 +19,9 @@ class TextStyles {
     double? fontSize,
   }) {
     return TextStyle(
-      fontSize: fontSize ?? 24,
-      fontWeight: fontWeight ?? FontWeight.normal,
-      color: color ?? AppColors.darkColor,
-    );
+        fontSize: fontSize ?? 24,
+        fontWeight: fontWeight ?? FontWeight.normal,
+        color: color);
   }
 
   static TextStyle getTitle({
@@ -34,7 +32,7 @@ class TextStyles {
     return TextStyle(
       fontSize: fontSize ?? 18,
       fontWeight: fontWeight ?? FontWeight.normal,
-      color: color ?? AppColors.darkColor,
+      color: color,
     );
   }
 
@@ -44,10 +42,9 @@ class TextStyles {
     double? fontSize,
   }) {
     return TextStyle(
-      fontSize: fontSize ?? 16,
-      fontWeight: fontWeight ?? FontWeight.normal,
-      color: color ?? AppColors.darkColor,
-    );
+        fontSize: fontSize ?? 16,
+        fontWeight: fontWeight ?? FontWeight.normal,
+        color: color);
   }
 
   static TextStyle getSmall({

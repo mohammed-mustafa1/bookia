@@ -1,0 +1,41 @@
+import 'package:bookia/core/utils/app_colors.dart';
+import 'package:bookia/core/utils/text_styles.dart';
+import 'package:flutter/material.dart';
+
+class MainButton extends StatelessWidget {
+  const MainButton({
+    super.key,
+    required this.onTap,
+    required this.text,
+    this.textColor,
+    this.backgroundColor,
+    this.borderColor,
+  });
+
+  final void Function() onTap;
+  final String text;
+  final Color? textColor;
+  final Color? backgroundColor;
+  final Color? borderColor;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        height: 56,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            color: backgroundColor ?? AppColors.primaryColor,
+            borderRadius: BorderRadius.circular(8),
+            border: borderColor != null
+                ? Border.all(color: borderColor ?? AppColors.darkColor)
+                : null),
+        child: Text(
+          text,
+          style: TextStyles.getBody(color: textColor ?? AppColors.whiteColor),
+        ),
+      ),
+    );
+  }
+}

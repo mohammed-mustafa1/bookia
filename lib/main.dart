@@ -1,3 +1,5 @@
+import 'package:bookia/core/routers/app_routers.dart';
+import 'package:bookia/core/utils/theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,12 +11,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routerConfig: AppRouter.routers,
+      theme: AppTheme.darkTheme,
     );
   }
 }
