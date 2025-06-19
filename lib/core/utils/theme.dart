@@ -20,23 +20,30 @@ class AppTheme {
     colorScheme: ColorScheme.light(
       onSurface: AppColors.darkColor,
     ),
+    appBarTheme: AppBarTheme(
+      surfaceTintColor: Colors.transparent,
+      iconTheme: IconThemeData(color: AppColors.whiteColor),
+    ),
   );
   static ThemeData darkTheme = ThemeData(
-    brightness: Brightness.dark,
-    fontFamily: AppFonts.dMSerifDisplay,
-    colorScheme: ColorScheme.dark(
-      onSurface: AppColors.whiteColor,
-    ),
-    inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.borderColor),
-          borderRadius: BorderRadius.circular(8)),
-      enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.borderColor),
-          borderRadius: BorderRadius.circular(8)),
-      focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.borderColor),
-          borderRadius: BorderRadius.circular(8)),
-    ),
-  );
+      brightness: Brightness.dark,
+      fontFamily: AppFonts.dMSerifDisplay,
+      colorScheme: ColorScheme.dark(
+        onSurface: AppColors.whiteColor,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.borderColor),
+            borderRadius: BorderRadius.circular(8)),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.borderColor),
+            borderRadius: BorderRadius.circular(8)),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.borderColor),
+            borderRadius: BorderRadius.circular(8)),
+      ),
+      appBarTheme: AppBarTheme(
+        surfaceTintColor: Colors.transparent,
+        iconTheme: IconThemeData(color: AppColors.whiteColor),
+      ));
 }
