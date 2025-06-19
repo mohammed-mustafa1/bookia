@@ -5,6 +5,7 @@ import 'package:bookia/components/main_text_form_field.dart';
 import 'package:bookia/core/extensions/media_query.dart';
 import 'package:bookia/core/extensions/navigation.dart';
 import 'package:bookia/core/routers/app_routers.dart';
+import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -31,20 +32,25 @@ class ForgotPasswordScreen extends StatelessWidget {
                     child: Text('Forgot Password?',
                         style: TextStyles.getHeadLine1()),
                   ),
+                  Gap(10),
                   Text(
                     "Don't worry! It occurs. Please enter the email address linked with your account.",
-                    style: TextStyles.getBody(),
+                    style: TextStyles.getBody(color: AppColors.grayColor),
                   ),
                   Gap(30),
                   MainTextFormField(text: 'Enter your email'),
                   Gap(38),
-                  MainButton(onTap: () {}, text: 'Send Code'),
+                  MainButton(
+                      onTap: () {
+                        context.pushTo(AppRouter.otpVerification);
+                      },
+                      text: 'Send Code'),
                 ],
               ),
             ),
           )),
       bottomNavigationBar: MainTextButton(
-        text: 'Remember Password? ',
+        text: 'Remember Password?',
         clickableText: 'Login',
         onTap: () {
           context.pushToBase(AppRouter.login);
