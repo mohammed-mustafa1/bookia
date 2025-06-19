@@ -35,10 +35,15 @@ class LoginScreen extends StatelessWidget {
                           style: TextStyles.getHeadLine1()),
                     ),
                     Gap(32),
-                    MainTextFormField(text: 'Enter your email'),
+                    MainTextFormField(
+                      text: 'Enter your email',
+                      keyboardType: TextInputType.emailAddress,
+                    ),
                     Gap(15),
                     MainTextFormField(
-                        text: 'Enter your password', obscureText: true),
+                      text: 'Enter your password',
+                      obscureText: true,
+                    ),
                     Gap(62),
                     MainButton(onTap: () {}, text: 'Login'),
                     Gap(34),

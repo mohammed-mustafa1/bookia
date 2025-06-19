@@ -5,12 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
-class MainTextFormField extends StatelessWidget {
+class MainTextFormField extends StatefulWidget {
   const MainTextFormField({
     super.key,
     required this.text,
     this.obscureText,
-    this.onSuffixTap,
     this.validator,
     this.controller,
     this.keyboardType,
@@ -18,42 +17,56 @@ class MainTextFormField extends StatelessWidget {
   });
   final String text;
   final bool? obscureText;
-  final Function()? onSuffixTap;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
+
+  @override
+  State<MainTextFormField> createState() => _MainTextFormFieldState();
+}
+
+class _MainTextFormFieldState extends State<MainTextFormField> {
+  bool obscureText = false;
+
+  @override
+  void initState() {
+    super.initState();
+    obscureText = widget.obscureText ?? false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 56,
       child: TextFormField(
-        inputFormatters: inputFormatters,
-        keyboardType: keyboardType,
-        controller: controller,
-        validator: validator,
+        inputFormatters: widget.inputFormatters,
+        keyboardType: widget.keyboardType,
+        controller: widget.controller,
+        validator: widget.validator,
         onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
-        obscureText: obscureText ?? false,
+        obscureText: obscureText,
         style: TextStyles.getSmall(fontSize: 15),
         decoration: InputDecoration(
-          hintText: text,
-          filled: true,
-          fillColor: Theme.of(context).brightness == Brightness.dark
-              ? AppColors.darkColor
-              : AppColors.accentColor,
-          contentPadding: EdgeInsets.all(16),
-          hintStyle:
-              TextStyles.getSmall(fontSize: 15, color: AppColors.grayColor),
-          suffixIconConstraints: BoxConstraints(minHeight: 22, minWidth: 22),
-          suffixIcon: obscureText == true
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: GestureDetector(
-                      onTap: onSuffixTap,
-                      child: SvgPicture.asset(AppAssets.fluentEyeSvg)),
-                )
-              : null,
-        ),
+            hintText: widget.text,
+            filled: true,
+            fillColor: Theme.of(context).brightness == Brightness.dark
+                ? AppColors.darkColor
+                : AppColors.accentColor,
+            contentPadding: EdgeInsets.all(16),
+            hintStyle:
+                TextStyles.getSmall(fontSize: 15, color: AppColors.grayColor),
+            suffixIconConstraints: BoxConstraints(minHeight: 22, minWidth: 22),
+            suffixIcon: widget.obscureText == true
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: GestureDetector(
+                        onTap: () {
+                          setState(() => obscureText = !obscureText);
+                        },
+                        child: SvgPicture.asset(AppAssets.fluentEyeSvg)),
+                  )
+                : null),
       ),
     );
   }
