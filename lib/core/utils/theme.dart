@@ -6,6 +6,17 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     fontFamily: AppFonts.dMSerifDisplay,
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.borderColor),
+          borderRadius: BorderRadius.circular(8)),
+      enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.borderColor),
+          borderRadius: BorderRadius.circular(8)),
+      focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.borderColor),
+          borderRadius: BorderRadius.circular(8)),
+    ),
     colorScheme: ColorScheme.light(
       onSurface: AppColors.darkColor,
     ),
@@ -15,6 +26,17 @@ class AppTheme {
     fontFamily: AppFonts.dMSerifDisplay,
     colorScheme: ColorScheme.dark(
       onSurface: AppColors.whiteColor,
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.borderColor),
+          borderRadius: BorderRadius.circular(8)),
+      enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.borderColor),
+          borderRadius: BorderRadius.circular(8)),
+      focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.borderColor),
+          borderRadius: BorderRadius.circular(8)),
     ),
   );
 }

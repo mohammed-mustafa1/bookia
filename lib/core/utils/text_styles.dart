@@ -1,4 +1,3 @@
-import 'package:bookia/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class TextStyles {
@@ -53,9 +52,8 @@ class TextStyles {
     double? fontSize,
   }) {
     return TextStyle(
-      fontSize: fontSize ?? 14,
-      fontWeight: fontWeight ?? FontWeight.normal,
-      color: color ?? AppColors.grayColor,
-    );
+        fontSize: fontSize ?? 14,
+        fontWeight: fontWeight ?? FontWeight.normal,
+        color: color);
   }
 }

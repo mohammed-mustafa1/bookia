@@ -32,7 +32,8 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             SvgPicture.asset(AppAssets.logoImageSvg, width: 250),
             Gap(10),
-            Text('Order Your Book Now!', style: TextStyles.getTitle()),
+            Text('Order Your Book Now!',
+                style: TextStyles.getTitle(color: AppColors.darkColor)),
             // Row(),
           ],
         ),
