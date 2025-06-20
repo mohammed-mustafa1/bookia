@@ -1,7 +1,7 @@
-import 'package:bookia/components/back_icon_button.dart';
-import 'package:bookia/components/main_button.dart';
-import 'package:bookia/components/main_text_button.dart';
-import 'package:bookia/components/main_text_form_field.dart';
+import 'package:bookia/components/buttons/back_icon_button.dart';
+import 'package:bookia/components/buttons/main_button.dart';
+import 'package:bookia/components/buttons/main_text_button.dart';
+import 'package:bookia/components/inputs/main_text_form_field.dart';
 import 'package:bookia/core/extensions/media_query.dart';
 import 'package:bookia/core/extensions/navigation.dart';
 import 'package:bookia/core/routers/app_routers.dart';

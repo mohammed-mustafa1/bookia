@@ -1,4 +1,4 @@
-import 'package:bookia/components/main_button.dart';
+import 'package:bookia/components/buttons/main_button.dart';
 import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/extensions/media_query.dart';
 import 'package:bookia/core/extensions/navigation.dart';

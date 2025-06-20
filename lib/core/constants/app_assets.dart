@@ -18,4 +18,6 @@ class AppAssets {
   static const String closeSvg = "assets/icons/Shape.svg";
   static const String exitSvg = "assets/icons/Frame_15.svg";
   static const String cartSvg = "assets/icons/Category.svg";
+  static const String loadingAnimation =
+      "assets/animations/loading_animation.json";
 }
