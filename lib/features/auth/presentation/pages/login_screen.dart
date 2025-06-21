@@ -96,6 +96,19 @@ class _LoginScreenState extends State<LoginScreen> {
                             obscureText: true,
                             textInputAction: TextInputAction.done,
                           ),
+                          Align(
+                            alignment: AlignmentDirectional.centerEnd,
+                            child: TextButton(
+                                onPressed: () {
+                                  context.pushTo(AppRouter.forgotPassword);
+                                },
+                                child: Text(
+                                  ' Forgot Password?',
+                                  style: TextStyles.getSmall(
+                                      fontSize: 15,
+                                      color: AppColors.primaryColor),
+                                )),
+                          ),
                           Gap(62),
                           MainButton(
                               onTap: () {

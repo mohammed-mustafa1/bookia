@@ -36,4 +36,55 @@ class AuthRepo {
       return null;
     }
   }
+
+  static Future<bool> forgotPassword({
+    required AuthParams forgotPasswordParams,
+  }) async {
+    try {
+      var response = await DioProvider.post(
+          endPoint: AppConstatns.forgotPasswordEndPoint,
+          body: forgotPasswordParams.toJson());
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (_) {
+      return false;
+    }
+  }
+
+  static Future<bool> otpVerification({
+    required AuthParams otpVerificationParams,
+  }) async {
+    try {
+      var response = await DioProvider.post(
+          endPoint: AppConstatns.checkForGetPassword,
+          body: otpVerificationParams.toJson());
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (_) {
+      return false;
+    }
+  }
+
+  static Future<bool> resetPassword({
+    required AuthParams resetPasswordParams,
+  }) async {
+    try {
+      var response = await DioProvider.post(
+          endPoint: AppConstatns.resetPasswordEndPoint,
+          body: resetPasswordParams.toJson());
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (_) {
+      return false;
+    }
+  }
 }

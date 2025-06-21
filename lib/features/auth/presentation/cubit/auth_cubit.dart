@@ -11,8 +11,9 @@ class AuthCubit extends Cubit<AuthState> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController passwordConfirmationController =
       TextEditingController();
+  TextEditingController otpController = TextEditingController();
   late AuthParams authParams;
-  register() {
+  register() async {
     authParams = AuthParams(
       name: nameController.text,
       email: emailController.text,
@@ -21,7 +22,7 @@ class AuthCubit extends Cubit<AuthState> {
     );
     emit(AuthLoading());
     try {
-      AuthRepo.registerUser(registerParams: authParams).then((value) {
+      await AuthRepo.registerUser(registerParams: authParams).then((value) {
         if (value != null) {
           emit(AuthSuccess());
         } else {
@@ -33,15 +34,74 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  login() {
+  login() async {
     authParams = AuthParams(
       email: emailController.text,
       password: passwordController.text,
     );
     emit(AuthLoading());
     try {
-      AuthRepo.loginUser(loginParams: authParams).then((value) {
+      await AuthRepo.loginUser(loginParams: authParams).then((value) {
         if (value != null) {
+          emit(AuthSuccess());
+        } else {
+          emit(AuthError('Something went wrong'));
+        }
+      });
+    } catch (e) {
+      emit(AuthError('Something went wrong'));
+    }
+  }
+
+  forgotPassword() async {
+    authParams = AuthParams(
+      email: emailController.text,
+    );
+    emit(AuthLoading());
+    try {
+      await AuthRepo.forgotPassword(forgotPasswordParams: authParams)
+          .then((value) {
+        if (value) {
+          emit(AuthSuccess());
+        } else {
+          emit(AuthError('Something went wrong'));
+        }
+      });
+    } catch (e) {
+      emit(AuthError('Something went wrong'));
+    }
+  }
+
+  otpVerification() async {
+    authParams = AuthParams(
+      email: emailController.text,
+      verifyCode: otpController.text,
+    );
+    emit(AuthLoading());
+    try {
+      await AuthRepo.otpVerification(otpVerificationParams: authParams)
+          .then((value) {
+        if (value) {
+          emit(AuthSuccess());
+        } else {
+          emit(AuthError('Something went wrong'));
+        }
+      });
+    } catch (e) {
+      emit(AuthError('Something went wrong'));
+    }
+  }
+
+  createNewPassword() async {
+    authParams = AuthParams(
+        verifyCode: otpController.text,
+        newPassword: passwordController.text,
+        newPasswordConfirmation: passwordConfirmationController.text);
+    emit(AuthLoading());
+    try {
+      await AuthRepo.resetPassword(resetPasswordParams: authParams)
+          .then((value) {
+        if (value) {
           emit(AuthSuccess());
         } else {
           emit(AuthError('Something went wrong'));

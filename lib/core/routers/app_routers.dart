@@ -2,6 +2,7 @@ import 'package:bookia/features/auth/presentation/pages/create_new_password_scre
 import 'package:bookia/features/auth/presentation/pages/forgot_password_screen.dart';
 import 'package:bookia/features/auth/presentation/pages/login_screen.dart';
 import 'package:bookia/features/auth/presentation/pages/otp_verification_screen.dart';
+import 'package:bookia/features/auth/presentation/pages/password_changed_screen.dart';
 import 'package:bookia/features/auth/presentation/pages/register_screen.dart';
 import 'package:bookia/features/intro/splash_screen.dart';
 import 'package:bookia/features/intro/welcome_screen.dart';
@@ -26,11 +27,16 @@ class AppRouter {
         path: forgotPassword,
         builder: (context, state) => ForgotPasswordScreen()),
     GoRoute(
-        path: otpVerification,
-        builder: (context, state) => OtpVerificationScreen()),
+      path: '$otpVerification/:email',
+      builder: (context, state) => OtpVerificationScreen(
+        email: state.pathParameters['email'],
+      ),
+    ),
     GoRoute(
-        path: createNewPassword,
-        builder: (context, state) => CreateNewPasswordScreen()),
+        path: '$createNewPassword/:pin',
+        builder: (context, state) => CreateNewPasswordScreen(
+              pinCode: state.pathParameters['pin'],
+            )),
     GoRoute(
         path: passwordChanged,
         builder: (context, state) => PasswordChangedScreen()),

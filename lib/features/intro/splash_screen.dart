@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/extensions/navigation.dart';
 import 'package:bookia/core/routers/app_routers.dart';
