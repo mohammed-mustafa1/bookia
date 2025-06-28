@@ -47,7 +47,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       }
                       if (state is AuthSuccess) {
                         context.pop();
-                        context.pushReplacement(AppRouter.login);
+                        context.pushToReplace(AppRouter.login);
                       }
                       if (state is AuthError) {
                         context.pop();
@@ -101,6 +101,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             textInputAction: TextInputAction.next,
                             controller: cubit.passwordController,
                             text: 'Password',
+                            obscureText: true,
                             validator: (value) {
                               return value == null || value.isEmpty
                                   ? 'Please enter your password'
@@ -114,6 +115,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               controller: cubit.passwordConfirmationController,
                               text: 'Confirm password',
                               textInputAction: TextInputAction.done,
+                              obscureText: true,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter your password';
@@ -144,7 +146,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             text: 'Already have an account? ',
             clickableText: 'Login Now',
             onTap: () {
-              context.pushTo(AppRouter.login);
+              context.pushToReplace(AppRouter.login);
             },
           )),
     );

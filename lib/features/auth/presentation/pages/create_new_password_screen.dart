@@ -35,6 +35,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
         body: Padding(
             padding: const EdgeInsets.all(22),
             child: Form(
+              autovalidateMode: AutovalidateMode.onUnfocus,
               key: formKey,
               child: SingleChildScrollView(
                 child: BlocConsumer<AuthCubit, AuthState>(
@@ -71,8 +72,11 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                         ),
                         Gap(32),
                         MainTextFormField(
+                          obscureText: true,
                           validator: (value) {
-                            if (value!.length < 8) {
+                            if (value!.isEmpty) {
+                              return 'Password cannot be empty';
+                            } else if (value.length < 8) {
                               return 'Password must be at least 8 characters';
                             }
                             return null;
@@ -83,8 +87,11 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                         ),
                         Gap(16),
                         MainTextFormField(
+                          obscureText: true,
                           validator: (value) {
-                            if (value!.length < 8) {
+                            if (value!.isEmpty) {
+                              return 'Password cannot be empty';
+                            } else if (value.length < 8) {
                               return 'Password must be at least 8 characters';
                             } else if (value != cubit.passwordController.text) {
                               return 'Passwords do not match';

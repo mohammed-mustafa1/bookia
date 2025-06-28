@@ -1,90 +1,91 @@
 import 'package:bookia/core/constants/app_constatns.dart';
+import 'package:bookia/core/errors/failures.dart';
 import 'package:bookia/core/services/dio_provider.dart';
 import 'package:bookia/features/auth/data/model/request/auth_params.dart';
 import 'package:bookia/features/auth/data/model/response/user_response/user_response.dart';
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class AuthRepo {
-  static Future<dynamic> registerUser({
-    required AuthParams registerParams,
-  }) async {
+  static Future<Either<Failure, UserResponse>> registerUser(
+      {required AuthParams registerParams}) async {
     try {
       var response = await DioProvider.post(
           endPoint: AppConstatns.registerEndPoint,
           body: registerParams.toJson());
-      if (response.statusCode == 201) {
-        return UserResponse.fromJson(response.data);
+      return right(UserResponse.fromJson(response.data));
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioException(e));
       } else {
-        return null;
+        return left(ServerFailure(message: e.toString()));
       }
-    } catch (_) {
-      return null;
     }
   }
 
-  static Future<dynamic> loginUser({
-    required AuthParams loginParams,
-  }) async {
+  static Future<Either<Failure, UserResponse>> loginUser(
+      {required AuthParams loginParams}) async {
     try {
       var response = await DioProvider.post(
           endPoint: AppConstatns.loginEndPoint, body: loginParams.toJson());
-      if (response.statusCode == 200) {
-        return UserResponse.fromJson(response.data);
+      return right(UserResponse.fromJson(response.data));
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioException(e));
       } else {
-        return null;
+        return left(ServerFailure(message: e.toString()));
       }
-    } catch (_) {
-      return null;
     }
   }
 
-  static Future<bool> forgotPassword({
+  static Future<Either<Failure, bool>> forgotPassword({
     required AuthParams forgotPasswordParams,
   }) async {
     try {
-      var response = await DioProvider.post(
+      await DioProvider.post(
           endPoint: AppConstatns.forgotPasswordEndPoint,
           body: forgotPasswordParams.toJson());
-      if (response.statusCode == 200) {
-        return true;
+      return right(true);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioException(e));
       } else {
-        return false;
+        return left(ServerFailure(message: e.toString()));
       }
-    } catch (_) {
-      return false;
     }
   }
 
-  static Future<bool> otpVerification({
+  static Future<Either<Failure, bool>> otpVerification({
     required AuthParams otpVerificationParams,
   }) async {
     try {
-      var response = await DioProvider.post(
+      await DioProvider.post(
           endPoint: AppConstatns.checkForGetPassword,
           body: otpVerificationParams.toJson());
-      if (response.statusCode == 200) {
-        return true;
+      return right(true);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioException(e));
       } else {
-        return false;
+        return left(ServerFailure(message: e.toString()));
       }
-    } catch (_) {
-      return false;
     }
   }
 
-  static Future<bool> resetPassword({
+  static Future<Either<Failure, bool>> resetPassword({
     required AuthParams resetPasswordParams,
   }) async {
     try {
-      var response = await DioProvider.post(
+      await DioProvider.post(
           endPoint: AppConstatns.resetPasswordEndPoint,
           body: resetPasswordParams.toJson());
-      if (response.statusCode == 200) {
-        return true;
+      return right(true);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioException(e));
       } else {
-        return false;
+        return left(ServerFailure(message: e.toString()));
       }
-    } catch (_) {
-      return false;
     }
   }
 }

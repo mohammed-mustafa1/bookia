@@ -48,6 +48,7 @@ class _MainTextFormFieldState extends State<MainTextFormField> {
       obscureText: obscureText,
       style: TextStyles.getSmall(fontSize: 15),
       decoration: InputDecoration(
+          errorMaxLines: 4,
           hintText: widget.text,
           filled: true,
           fillColor: Theme.of(context).brightness == Brightness.dark

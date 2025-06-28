@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                       if (state is AuthSuccess) {
                         context.pop();
-                        context.pushReplacement(AppRouter.welcome);
+                        context.pushToBase(AppRouter.welcome);
                       }
                       if (state is AuthError) {
                         context.pop();
@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: context.width * 0.74,
+                            width: context.width * 0.78,
                             child: Text('Welcome back! Glad to see you, Again!',
                                 style: TextStyles.getHeadLine1()),
                           ),
@@ -152,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
             text: 'Don’t have an account? ',
             clickableText: 'Register Now',
             onTap: () {
-              context.pushTo(AppRouter.register);
+              context.pushToReplace(AppRouter.register);
             },
           )),
     );

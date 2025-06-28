@@ -7,6 +7,12 @@ extension NavigatorExtension on BuildContext {
   }
 
   void pushToBase(String routName) {
-    go(routName);
+    go(
+      routName,
+    );
+  }
+
+  void pushToReplace(String routName, {Object? extra}) {
+    pushReplacement(routName, extra: extra);
   }
 }

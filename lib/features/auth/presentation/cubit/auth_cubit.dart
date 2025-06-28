@@ -21,17 +21,14 @@ class AuthCubit extends Cubit<AuthState> {
       passwordConfirmation: passwordConfirmationController.text,
     );
     emit(AuthLoading());
-    try {
-      await AuthRepo.registerUser(registerParams: authParams).then((value) {
-        if (value != null) {
-          emit(AuthSuccess());
-        } else {
-          emit(AuthError('Something went wrong'));
-        }
+
+    await AuthRepo.registerUser(registerParams: authParams).then((value) {
+      return value.fold((error) {
+        emit(AuthError(error.message));
+      }, (response) {
+        emit(AuthSuccess());
       });
-    } catch (e) {
-      emit(AuthError('Something went wrong'));
-    }
+    });
   }
 
   login() async {
@@ -40,17 +37,13 @@ class AuthCubit extends Cubit<AuthState> {
       password: passwordController.text,
     );
     emit(AuthLoading());
-    try {
-      await AuthRepo.loginUser(loginParams: authParams).then((value) {
-        if (value != null) {
-          emit(AuthSuccess());
-        } else {
-          emit(AuthError('Something went wrong'));
-        }
+    await AuthRepo.loginUser(loginParams: authParams).then((value) {
+      return value.fold((error) {
+        emit(AuthError(error.message));
+      }, (response) {
+        emit(AuthSuccess());
       });
-    } catch (e) {
-      emit(AuthError('Something went wrong'));
-    }
+    });
   }
 
   forgotPassword() async {
@@ -58,18 +51,14 @@ class AuthCubit extends Cubit<AuthState> {
       email: emailController.text,
     );
     emit(AuthLoading());
-    try {
-      await AuthRepo.forgotPassword(forgotPasswordParams: authParams)
-          .then((value) {
-        if (value) {
-          emit(AuthSuccess());
-        } else {
-          emit(AuthError('Something went wrong'));
-        }
-      });
-    } catch (e) {
-      emit(AuthError('Something went wrong'));
-    }
+
+    await AuthRepo.forgotPassword(forgotPasswordParams: authParams)
+        .then((value) {
+      return value.fold(
+        (error) => emit(AuthError(error.message)),
+        (response) => emit(AuthSuccess()),
+      );
+    });
   }
 
   otpVerification() async {
@@ -78,18 +67,14 @@ class AuthCubit extends Cubit<AuthState> {
       verifyCode: otpController.text,
     );
     emit(AuthLoading());
-    try {
-      await AuthRepo.otpVerification(otpVerificationParams: authParams)
-          .then((value) {
-        if (value) {
-          emit(AuthSuccess());
-        } else {
-          emit(AuthError('Something went wrong'));
-        }
+    await AuthRepo.otpVerification(otpVerificationParams: authParams)
+        .then((value) {
+      value.fold((error) {
+        emit(AuthError(error.message));
+      }, (response) {
+        emit(AuthSuccess());
       });
-    } catch (e) {
-      emit(AuthError('Something went wrong'));
-    }
+    });
   }
 
   createNewPassword() async {
@@ -98,17 +83,12 @@ class AuthCubit extends Cubit<AuthState> {
         newPassword: passwordController.text,
         newPasswordConfirmation: passwordConfirmationController.text);
     emit(AuthLoading());
-    try {
-      await AuthRepo.resetPassword(resetPasswordParams: authParams)
-          .then((value) {
-        if (value) {
-          emit(AuthSuccess());
-        } else {
-          emit(AuthError('Something went wrong'));
-        }
+    await AuthRepo.resetPassword(resetPasswordParams: authParams).then((value) {
+      value.fold((error) {
+        emit(AuthError(error.message));
+      }, (response) {
+        emit(AuthSuccess());
       });
-    } catch (e) {
-      emit(AuthError('Something went wrong'));
-    }
+    });
   }
 }

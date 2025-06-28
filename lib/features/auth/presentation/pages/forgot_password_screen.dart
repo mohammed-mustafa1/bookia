@@ -48,7 +48,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     }
                     if (state is AuthSuccess) {
                       context.pop();
-                      context.push('${AppRouter.otpVerification}/$email');
+                      context.pushToReplace(AppRouter.otpVerification,
+                          extra: email);
                     }
                     if (state is AuthError) {
                       context.pop();
@@ -110,7 +111,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           text: 'Remember Password?',
           clickableText: 'Login',
           onTap: () {
-            context.pushToBase(AppRouter.login);
+            context.pushToReplace(AppRouter.login);
           },
         ),
       ),

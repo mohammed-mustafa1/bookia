@@ -27,16 +27,14 @@ class AppRouter {
         path: forgotPassword,
         builder: (context, state) => ForgotPasswordScreen()),
     GoRoute(
-      path: '$otpVerification/:email',
-      builder: (context, state) => OtpVerificationScreen(
-        email: state.pathParameters['email'],
-      ),
+      path: otpVerification,
+      builder: (context, state) =>
+          OtpVerificationScreen(email: state.extra as String),
     ),
     GoRoute(
-        path: '$createNewPassword/:pin',
-        builder: (context, state) => CreateNewPasswordScreen(
-              pinCode: state.pathParameters['pin'],
-            )),
+        path: createNewPassword,
+        builder: (context, state) =>
+            CreateNewPasswordScreen(pinCode: state.extra as String)),
     GoRoute(
         path: passwordChanged,
         builder: (context, state) => PasswordChangedScreen()),

@@ -3,6 +3,7 @@ import 'package:bookia/components/buttons/main_button.dart';
 import 'package:bookia/components/buttons/main_text_button.dart';
 import 'package:bookia/components/dialogs/loading_dialog.dart';
 import 'package:bookia/core/extensions/media_query.dart';
+import 'package:bookia/core/extensions/navigation.dart';
 import 'package:bookia/core/routers/app_routers.dart';
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/utils/text_styles.dart';
@@ -36,7 +37,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             showLoadingDialog(context);
           } else if (state is AuthSuccess && pin != null) {
             context.pop();
-            context.pushReplacement('${AppRouter.createNewPassword}/$pin');
+            context.pushToReplace(AppRouter.createNewPassword, extra: pin);
           } else if (state is AuthSuccess && pin == null) {
             context.pop();
           } else if (state is AuthError) {

@@ -1,6 +1,6 @@
 import 'package:bookia/components/buttons/main_button.dart';
 import 'package:bookia/core/constants/app_assets.dart';
-import 'package:bookia/core/routers/app_routers.dart';
+
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/utils/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class PasswordChangedScreen extends StatelessWidget {
             Gap(40),
             MainButton(
                 onTap: () {
-                  context.pushReplacement(AppRouter.login);
+                  context.pop();
                 },
                 text: 'Back to Login')
           ],
