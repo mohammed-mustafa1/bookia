@@ -31,7 +31,7 @@ class _HomeSliderState extends State<HomeSlider> {
           },
           options: CarouselOptions(
             aspectRatio: 4 / 1.8,
-            viewportFraction: 0.9,
+            viewportFraction: 1,
             initialPage: 0,
             enableInfiniteScroll: true,
             reverse: false,
@@ -40,7 +40,7 @@ class _HomeSliderState extends State<HomeSlider> {
             autoPlayAnimationDuration: Duration(milliseconds: 800),
             autoPlayCurve: Curves.fastOutSlowIn,
             enlargeCenterPage: true,
-            enlargeFactor: 0.3,
+            enlargeFactor: 0.25,
             onPageChanged: (index, reason) {
               setState(() {
                 activeIndex = index;
