@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                       if (state is AuthSuccess) {
                         context.pop();
-                        context.pushToBase(AppRouter.welcome);
+                        context.pushToBase(AppRouter.mainScreen);
                       }
                       if (state is AuthError) {
                         context.pop();
