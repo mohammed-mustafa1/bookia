@@ -6,4 +6,6 @@ class AppConstatns {
   static const resetPasswordEndPoint = 'reset-password';
   static const checkForGetPassword = 'check-forget-password';
   static const changePasswordEndPoint = 'reset-password';
+  static const sliderEndPoint = 'sliders';
+  static const bestSellerEndPoint = 'products-bestseller';
 }

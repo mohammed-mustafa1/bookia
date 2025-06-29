@@ -20,4 +20,5 @@ class AppAssets {
   static const String cartSvg = "assets/icons/Category.svg";
   static const String loadingAnimation =
       "assets/animations/loading_animation.json";
+  static const String noCoverImage = "assets/images/no_cover_available.png";
 }

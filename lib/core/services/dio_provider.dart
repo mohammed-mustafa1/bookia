@@ -11,7 +11,7 @@ class DioProvider {
 
   static Future<Response> get({
     required String endPoint,
-    required Map<String, dynamic> body,
+    Map<String, dynamic>? body,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) async {
