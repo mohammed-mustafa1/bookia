@@ -1,4 +1,6 @@
+import 'package:bookia/core/services/shared_prefs.dart';
 import 'package:bookia/features/auth/data/model/request/auth_params.dart';
+import 'package:bookia/features/auth/data/model/response/user_response/user.dart';
 import 'package:bookia/features/auth/data/repo/auth_repo.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_state.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,6 +28,8 @@ class AuthCubit extends Cubit<AuthState> {
       return value.fold((error) {
         emit(AuthError(error.message));
       }, (response) {
+        SharedPrefs.setUserToken(response.data?.token ?? '');
+        SharedPrefs.setUserInfo(response.data?.user ?? User());
         emit(AuthSuccess());
       });
     });
@@ -41,6 +45,8 @@ class AuthCubit extends Cubit<AuthState> {
       return value.fold((error) {
         emit(AuthError(error.message));
       }, (response) {
+        SharedPrefs.setUserToken(response.data?.token ?? '');
+        SharedPrefs.setUserInfo(response.data?.user ?? User());
         emit(AuthSuccess());
       });
     });

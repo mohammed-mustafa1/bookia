@@ -3,6 +3,7 @@
 import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/extensions/navigation.dart';
 import 'package:bookia/core/routers/app_routers.dart';
+import 'package:bookia/core/services/shared_prefs.dart';
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/utils/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +21,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3))
-        .then((value) => context.pushToBase(AppRouter.welcome));
+    String token = SharedPrefs.getToken();
+    Future.delayed(const Duration(seconds: 3)).then((value) {
+      if (token.isNotEmpty) {
+        context.pushToBase(AppRouter.mainScreen);
+      } else {
+        context.pushToBase(AppRouter.welcome);
+      }
+    });
   }
 
   @override
