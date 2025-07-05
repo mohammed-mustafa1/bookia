@@ -8,4 +8,5 @@ class AppConstatns {
   static const changePasswordEndPoint = 'reset-password';
   static const sliderEndPoint = 'sliders';
   static const bestSellerEndPoint = 'products-bestseller';
+  static const wishListEndPoint = 'wishlist';
 }

@@ -8,14 +8,17 @@ class BestSellerGridViewItem extends StatelessWidget {
   final Product product;
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: CachedNetworkImage(
-        imageUrl: product.image ?? '',
-        fit: BoxFit.cover,
-        errorWidget: (context, url, error) {
-          return Image.asset(AppAssets.noCoverImage, fit: BoxFit.cover);
-        },
+    return Hero(
+      tag: product.id ?? '',
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: CachedNetworkImage(
+          imageUrl: product.image ?? '',
+          fit: BoxFit.cover,
+          errorWidget: (context, url, error) {
+            return Image.asset(AppAssets.noCoverImage, fit: BoxFit.cover);
+          },
+        ),
       ),
     );
   }

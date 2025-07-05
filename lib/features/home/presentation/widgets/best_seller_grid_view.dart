@@ -1,3 +1,5 @@
+import 'package:bookia/core/extensions/navigation.dart';
+import 'package:bookia/core/routers/app_routers.dart';
 import 'package:bookia/features/home/data/model/best_seller_response/product.dart';
 import 'package:bookia/features/home/presentation/widgets/best_seller_grid_view_item.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,12 @@ class BestSellerGridView extends StatelessWidget {
         crossAxisSpacing: 12,
       ),
       itemBuilder: (context, index) {
-        return BestSellerGridViewItem(product: products[index]);
+        return GestureDetector(
+          onTap: () {
+            context.pushTo(AppRouter.bookDetails, extra: products[index]);
+          },
+          child: BestSellerGridViewItem(product: products[index]),
+        );
       },
       itemCount: products.length,
       shrinkWrap: true,

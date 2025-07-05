@@ -10,6 +10,8 @@ class MainButton extends StatelessWidget {
     this.textColor,
     this.backgroundColor,
     this.borderColor,
+    this.height,
+    this.width,
   });
 
   final void Function() onTap;
@@ -17,13 +19,15 @@ class MainButton extends StatelessWidget {
   final Color? textColor;
   final Color? backgroundColor;
   final Color? borderColor;
+  final double? height;
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: double.infinity,
-        height: 56,
+        width: width ?? double.infinity,
+        height: height ?? 56,
         alignment: Alignment.center,
         decoration: BoxDecoration(
             color: backgroundColor ?? AppColors.primaryColor,
