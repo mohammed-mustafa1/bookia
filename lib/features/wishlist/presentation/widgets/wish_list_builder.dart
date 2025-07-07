@@ -1,0 +1,91 @@
+import 'package:bookia/components/buttons/main_button.dart';
+import 'package:bookia/core/constants/app_assets.dart';
+import 'package:bookia/core/utils/text_styles.dart';
+import 'package:bookia/features/home/data/model/best_seller_response/product.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:gap/gap.dart';
+
+class WishListBuilder extends StatelessWidget {
+  const WishListBuilder({
+    super.key,
+    required this.books,
+    required this.onRemove,
+    required this.onAddToCart,
+  });
+
+  final List<Product> books;
+  final Function(int) onRemove;
+  final Function(int) onAddToCart;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      padding: EdgeInsets.all(20),
+      itemCount: books.length,
+      itemBuilder: (context, index) {
+        var book = books[index];
+        return Hero(
+          tag: index,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: CachedNetworkImage(
+                  imageUrl: book.image ?? '',
+                  width: 100,
+                  height: 118,
+                  fit: BoxFit.cover,
+                  errorWidget: (context, url, error) {
+                    return Image.asset(
+                      AppAssets.noCoverImage,
+                      width: 100,
+                      height: 118,
+                      fit: BoxFit.cover,
+                    );
+                  },
+                ),
+              ),
+              const Gap(20),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                            child: Text(book.name ?? '',
+                                style: TextStyles.getTitle(
+                                    color: Color(0xff606060)),
+                                maxLines: 2)),
+                        GestureDetector(
+                            onTap: () => onRemove(book.id ?? 0),
+                            child: SvgPicture.asset(AppAssets.closeSvg)),
+                      ],
+                    ),
+                    Gap(9),
+                    Text('\$${book.price}', style: TextStyles.getBody()),
+                    Gap(16),
+                    MainButton(
+                        height: 40,
+                        onTap: () => onAddToCart(book.id ?? 0),
+                        text: 'Add to Cart'),
+                  ],
+                ),
+              )
+            ],
+          ),
+        );
+      },
+      separatorBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        child: const Divider(
+          color: Color(0xfff0f0f0),
+        ),
+      ),
+    );
+  }
+}

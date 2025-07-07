@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
           builder: (context, state) {
             var cubit = context.read<HomeCubit>();
             if (state is HomeError) {
-              return Text(state.message);
+              return Center(child: Text(state.message));
             } else if (state is HomeSuccess) {
               return SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),

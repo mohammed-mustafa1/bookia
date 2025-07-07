@@ -10,3 +10,7 @@ class WishListError extends WishListState {
 }
 
 class WishListSuccess extends WishListState {}
+
+// class WishListAddSuccess extends WishListState {}
+
+// class WishListRemoveSuccess extends WishListState {}

@@ -1,13 +1,13 @@
-import 'package:bookia/components/buttons/main_button.dart';
 import 'package:bookia/core/constants/app_assets.dart';
+import 'package:bookia/core/extensions/media_query.dart';
 import 'package:bookia/core/utils/text_styles.dart';
 import 'package:bookia/features/wishlist/presentation/cubit/wish_list_cubit.dart';
 import 'package:bookia/features/wishlist/presentation/cubit/wish_list_state.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:bookia/features/wishlist/presentation/widgets/empty_ui.dart';
+import 'package:bookia/features/wishlist/presentation/widgets/wish_list_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gap/gap.dart';
+import 'package:lottie/lottie.dart';
 
 class WishListScreen extends StatelessWidget {
   const WishListScreen({super.key});
@@ -23,64 +23,33 @@ class WishListScreen extends StatelessWidget {
         ),
         body: BlocBuilder<WishListCubit, WishListState>(
           builder: (context, state) {
-            return ListView.separated(
-              padding: EdgeInsets.all(20),
-              itemCount: 4,
-              itemBuilder: (context, index) {
-                return Hero(
-                  tag: index,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CachedNetworkImage(
-                        imageUrl: '',
-                        // product.image ?? '',
-                        width: 100, height: 118,
-                        fit: BoxFit.cover,
-                        errorWidget: (context, url, error) {
-                          return Image.asset(
-                            AppAssets.noCoverImage,
-                            width: 100,
-                            height: 118,
-                            fit: BoxFit.cover,
-                          );
-                        },
-                      ),
-                      const Gap(20),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                    child: Text('',
-                                        style: TextStyles.getTitle(
-                                            color: Color(0xff606060)),
-                                        maxLines: 2)),
-                                SvgPicture.asset(AppAssets.closeSvg),
-                              ],
-                            ),
-                            Gap(9),
-                            Text('\$285', style: TextStyles.getBody()),
-                            Gap(16),
-                            MainButton(
-                                height: 40, onTap: () {}, text: 'Add to Cart')
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                child: const Divider(
-                  color: Color(0xfff0f0f0),
+            var cubit = context.read<WishListCubit>();
+            var books = cubit.getWishListresponse.data?.data ?? [];
+            if (state is WishListSuccess) {
+              if (books.isEmpty) {
+                return EmptyUi();
+              }
+              return WishListBuilder(
+                onAddToCart: (bookId) {
+                  cubit.addToCart(bookId: bookId);
+                },
+                books: books,
+                onRemove: (bookId) {
+                  cubit.removeFromWishList(bookId: bookId);
+                },
+              );
+            } else if (state is WishListError) {
+              return Center(child: Text(state.message));
+            } else {
+              return Center(
+                child: LottieBuilder.asset(
+                  AppAssets.loadingAnimation,
+                  width: context.width * 0.5,
+                  height: context.height * 0.5,
+                  fit: BoxFit.scaleDown,
                 ),
-              ),
-            );
+              );
+            }
           },
         ),
       ),
