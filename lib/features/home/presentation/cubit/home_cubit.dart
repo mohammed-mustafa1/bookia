@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bookia/core/errors/failures.dart';
 import 'package:bookia/features/home/data/model/best_seller_response/best_seller_response.dart';
 import 'package:bookia/features/home/data/model/best_seller_response/product.dart';
@@ -15,23 +17,27 @@ class HomeCubit extends Cubit<HomeState> {
   List<Product> bestSellersList = [];
 
   void getHomeData() async {
-    emit(HomeLoading());
-    var future = await Future.wait([
-      HomeRepo.getSliders(),
-      HomeRepo.getBestSellers(),
-    ]);
-    (future[0] as Either<Failure, SliderResponse>).fold((failure) {
-      emit(HomeError(message: failure.message));
-    }, (response) {
-      sliders = response.data!.sliders!;
-      emit(HomeSuccess());
-    });
+    try {
+      emit(HomeLoading());
+      var future = await Future.wait([
+        HomeRepo.getSliders(),
+        HomeRepo.getBestSellers(),
+      ]);
+      (future[0] as Either<Failure, SliderResponse>).fold((failure) {
+        emit(HomeError(message: failure.message));
+      }, (response) {
+        sliders = response.data!.sliders!;
+        emit(HomeSuccess());
+      });
 
-    (future[1] as Either<Failure, BestSellerResponse>).fold((failure) {
-      emit(HomeError(message: failure.message));
-    }, (response) {
-      bestSellersList = response.data!.products!;
-      emit(HomeSuccess());
-    });
+      (future[1] as Either<Failure, BestSellerResponse>).fold((failure) {
+        emit(HomeError(message: failure.message));
+      }, (response) {
+        bestSellersList = response.data!.products!;
+        emit(HomeSuccess());
+      });
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }

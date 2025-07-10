@@ -1,4 +1,4 @@
-import 'package:bookia/components/snack_bars/error_snack_bar.dart';
+import 'package:bookia/components/snack_bars/main_snack_bar.dart';
 import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/utils/text_styles.dart';
 import 'package:bookia/features/cart/data/model/cart_response/cart_item.dart';
@@ -70,7 +70,8 @@ class CartItemWidget extends StatelessWidget {
                         onUpdate(
                             book.itemId ?? 0, (book.itemQuantity ?? 0) + 1);
                       } else {
-                        showErrorSnackBar(context, 'Not Enough Stock');
+                        showMainSnackBar(context,
+                            text: 'Not Enough Stock', type: SnackBarType.error);
                       }
                     },
                     style: IconButton.styleFrom(
@@ -91,7 +92,9 @@ class CartItemWidget extends StatelessWidget {
                         onUpdate(
                             book.itemId ?? 0, (book.itemQuantity ?? 0) - 1);
                       } else {
-                        showErrorSnackBar(context, 'quantity can not be zero');
+                        showMainSnackBar(context,
+                            text: 'quantity can not be zero',
+                            type: SnackBarType.error);
                       }
                     },
                     style: IconButton.styleFrom(

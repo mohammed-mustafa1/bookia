@@ -2,7 +2,7 @@ import 'package:bookia/components/buttons/back_icon_button.dart';
 import 'package:bookia/components/buttons/main_button.dart';
 import 'package:bookia/components/buttons/main_text_button.dart';
 import 'package:bookia/components/dialogs/loading_dialog.dart';
-import 'package:bookia/components/snack_bars/error_snack_bar.dart';
+import 'package:bookia/components/snack_bars/main_snack_bar.dart';
 import 'package:bookia/core/extensions/media_query.dart';
 import 'package:bookia/core/extensions/navigation.dart';
 import 'package:bookia/core/extensions/validation.dart';
@@ -54,7 +54,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                       if (state is AuthError) {
                         context.pop();
-                        showErrorSnackBar(context, state.errorMessage);
+                        showMainSnackBar(context,
+                            text: state.errorMessage, type: SnackBarType.error);
                       }
                     },
                     builder: (context, state) {

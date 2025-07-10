@@ -1,8 +1,9 @@
 import 'package:bookia/components/buttons/main_button.dart';
 import 'package:bookia/components/dialogs/loading_dialog.dart';
 import 'package:bookia/components/dialogs/success_dialog.dart';
-import 'package:bookia/core/constants/app_assets.dart';
-import 'package:bookia/core/extensions/media_query.dart';
+import 'package:bookia/components/error_text_ui.dart';
+import 'package:bookia/components/loading_ui.dart';
+import 'package:bookia/components/snack_bars/main_snack_bar.dart';
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/utils/text_styles.dart';
 import 'package:bookia/features/cart/data/model/cart_response/cart_item.dart';
@@ -14,7 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lottie/lottie.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -45,10 +45,15 @@ class CartScreen extends StatelessWidget {
                         showLoadingDialog(context);
                         await cubit.removeFromCart(cartItemId: value);
                         context.pop();
+                        showMainSnackBar(context,
+                            text: 'Cart Update Successfully',
+                            type: SnackBarType.success);
                       },
-                      onUpdate: (itemId, quantity) {
-                        cubit.updateCart(
+                      onUpdate: (itemId, quantity) async {
+                        showLoadingDialog(context);
+                        await cubit.updateCart(
                             cartItemId: itemId, quantity: quantity);
+                        context.pop();
                       },
                     ),
                   ),
@@ -83,20 +88,9 @@ class CartScreen extends StatelessWidget {
                 ],
               );
             } else if (state is CartFailure) {
-              return Center(
-                  child: Text(
-                state.message,
-                style: TextStyles.getTitle(),
-              ));
+              return ErrorTextUi(message: state.message);
             } else {
-              return Center(
-                child: LottieBuilder.asset(
-                  AppAssets.loadingAnimation,
-                  width: context.width * 0.5,
-                  height: context.height * 0.5,
-                  fit: BoxFit.scaleDown,
-                ),
-              );
+              return LoadingUi();
             }
           },
         ),

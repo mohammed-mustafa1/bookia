@@ -1,6 +1,7 @@
 import 'package:bookia/components/buttons/back_icon_button.dart';
 import 'package:bookia/components/buttons/main_button.dart';
 import 'package:bookia/components/dialogs/loading_dialog.dart';
+import 'package:bookia/components/snack_bars/main_snack_bar.dart';
 import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/extensions/media_query.dart';
 import 'package:bookia/core/utils/app_colors.dart';
@@ -51,9 +52,19 @@ class BookDetailsScreen extends StatelessWidget {
                   onTap: () async {
                     showLoadingDialog(context);
                     if (bookAddedId != book.id) {
-                      await cubit.addToWishList(bookId: book.id ?? 0);
+                      await cubit.addToWishList(bookId: book.id ?? 0).then((_) {
+                        showMainSnackBar(context,
+                            text: 'WishList Update Successfully',
+                            type: SnackBarType.success);
+                      });
                     } else if (bookAddedId == book.id) {
-                      await cubit.removeFromWishList(bookId: book.id ?? 0);
+                      await cubit
+                          .removeFromWishList(bookId: book.id ?? 0)
+                          .then((_) {
+                        showMainSnackBar(context,
+                            text: 'WishList Update Successfully',
+                            type: SnackBarType.success);
+                      });
                     }
                     await cubit.getWishList();
                     context.pop();
@@ -127,8 +138,11 @@ class BookDetailsScreen extends StatelessWidget {
                     child: MainButton(
                       onTap: () async {
                         showLoadingDialog(context);
-                        await cubit.addToCart(bookId: book.id ?? 0);
-
+                        await cubit.addToCart(bookId: book.id ?? 0).then((_) {
+                          showMainSnackBar(context,
+                              text: 'Cart Update Successfully',
+                              type: SnackBarType.success);
+                        });
                         context.pop();
                       },
                       text: 'Add to Cart',
