@@ -55,4 +55,21 @@ class CartRepo {
       return Left(ServerFailure(message: e.toString()));
     }
   }
+
+  static Future<Either<Failure, CartResponse>> updateCart(
+      {required int cartItemId, required int quantity}) async {
+    try {
+      var response = await DioProvider.post(
+        endPoint: AppConstatns.updateCartEndPoint,
+        headers: {'Authorization': 'Bearer ${SharedPrefs.getToken()}'},
+        body: {"cart_item_id": "$cartItemId", "quantity": "$quantity"},
+      );
+      return Right(CartResponse.fromJson(response.data));
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioException(e));
+      }
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
 }

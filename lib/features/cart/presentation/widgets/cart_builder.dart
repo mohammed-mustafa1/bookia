@@ -1,30 +1,31 @@
-import 'package:bookia/features/home/data/model/best_seller_response/product.dart';
-import 'package:bookia/features/wishlist/presentation/widgets/wish_list_item_widget.dart';
+import 'package:bookia/features/cart/data/model/cart_response/cart_item.dart';
+import 'package:bookia/features/cart/presentation/widgets/cart_item_widget.dart';
 import 'package:flutter/material.dart';
 
-class WishListBuilder extends StatelessWidget {
-  const WishListBuilder({
+class CartBuilder extends StatelessWidget {
+  const CartBuilder({
     super.key,
     required this.books,
-    required this.onRemove,
-    required this.onAddToCart,
+    required this.onRemoveItem,
+    required this.onUpdate,
   });
 
-  final List<Product> books;
-  final Function(int) onRemove;
-  final Function(int) onAddToCart;
-
+  final List<CartItem> books;
+  final Function(int) onRemoveItem;
+  final Function(int, int) onUpdate;
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
       padding: EdgeInsets.all(20),
       itemCount: books.length,
       itemBuilder: (context, index) {
-        var book = books[index];
         return Hero(
           tag: index,
-          child: WishListItemWidget(
-              book: book, onRemove: onRemove, onAddToCart: onAddToCart),
+          child: CartItemWidget(
+            onUpdate: onUpdate,
+            book: books[index],
+            onRemoveItem: onRemoveItem,
+          ),
         );
       },
       separatorBuilder: (context, index) => Padding(

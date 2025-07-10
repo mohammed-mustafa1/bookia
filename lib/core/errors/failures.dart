@@ -26,7 +26,7 @@ class ServerFailure extends Failure {
       case DioExceptionType.connectionError:
         return const ServerFailure(message: 'Connection Error');
       case DioExceptionType.unknown:
-        if (dioException.message!.contains('SocketException')) {
+        if (dioException.message?.contains('SocketException') ?? true) {
           return const ServerFailure(message: 'No Internet Connection');
         } else {
           return const ServerFailure(message: 'Unexpected Error');
