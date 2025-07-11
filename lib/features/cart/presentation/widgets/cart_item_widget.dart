@@ -60,8 +60,16 @@ class CartItemWidget extends StatelessWidget {
                           ),
                           maxLines: 2)),
                   GestureDetector(
-                      onTap: () => onRemoveItem(book.itemId ?? 0),
-                      child: SvgPicture.asset(AppAssets.closeSvg)),
+                    onTap: () => onRemoveItem(book.itemId ?? 0),
+                    child: SvgPicture.asset(
+                      AppAssets.closeSvg,
+                      colorFilter: ColorFilter.mode(
+                          context.brightness == Brightness.light
+                              ? AppColors.darkColor
+                              : AppColors.whiteColor,
+                          BlendMode.srcIn),
+                    ),
+                  ),
                 ],
               ),
               Gap(9),

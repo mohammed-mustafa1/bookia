@@ -12,7 +12,7 @@ class BestSellerGridView extends StatelessWidget {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.58,
+        childAspectRatio: 3 / 4,
         mainAxisSpacing: 12,
         crossAxisSpacing: 12,
       ),

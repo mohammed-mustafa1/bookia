@@ -61,7 +61,14 @@ class WishListItemWidget extends StatelessWidget {
                           maxLines: 2)),
                   GestureDetector(
                       onTap: () => onRemove(book.id ?? 0),
-                      child: SvgPicture.asset(AppAssets.closeSvg)),
+                      child: SvgPicture.asset(
+                        AppAssets.closeSvg,
+                        colorFilter: ColorFilter.mode(
+                            context.brightness == Brightness.light
+                                ? AppColors.darkColor
+                                : AppColors.whiteColor,
+                            BlendMode.srcIn),
+                      )),
                 ],
               ),
               Gap(9),
