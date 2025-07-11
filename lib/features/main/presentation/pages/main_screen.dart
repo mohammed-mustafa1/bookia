@@ -4,6 +4,7 @@ import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/features/cart/presentation/pages/cart_screen.dart';
 import 'package:bookia/features/home/presentation/pages/home_screen.dart';
 import 'package:bookia/features/wishlist/presentation/pages/wish_list_screen.dart';
+import 'package:bookia/profile/presentation/pages/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -20,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     WishListScreen(),
     CartScreen(),
-    Center(child: Text('Profile')),
+    ProfileScreen()
   ];
   @override
   Widget build(BuildContext context) {

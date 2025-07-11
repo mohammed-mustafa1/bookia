@@ -9,6 +9,9 @@ import 'package:bookia/features/home/data/model/best_seller_response/product.dar
 import 'package:bookia/features/main/presentation/pages/main_screen.dart';
 import 'package:bookia/features/intro/splash_screen.dart';
 import 'package:bookia/features/intro/welcome_screen.dart';
+import 'package:bookia/profile/presentation/pages/edit_profile_screen.dart';
+import 'package:bookia/profile/presentation/pages/resest_password_screen.dart';
+import 'package:bookia/profile/presentation/pages/theme_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
@@ -22,32 +25,43 @@ class AppRouter {
   static const String passwordChanged = '/password-changed';
   static const String mainScreen = '/main-screen';
   static const String bookDetails = '/book-details';
+  static const String editProfile = '/edit-Profile';
+  static const String resetPassword = '/reset-Password';
+  static const String changeTheme = '/change-theme';
 
-  static final routers = GoRouter(routes: [
-    GoRoute(path: splash, builder: (context, state) => SplashScreen()),
-    GoRoute(path: welcome, builder: (context, state) => WelcomeScreen()),
-    GoRoute(path: login, builder: (context, state) => LoginScreen()),
-    GoRoute(path: register, builder: (context, state) => RegisterScreen()),
-    GoRoute(
-        path: forgotPassword,
-        builder: (context, state) => ForgotPasswordScreen()),
-    GoRoute(
-      path: otpVerification,
-      builder: (context, state) =>
-          OtpVerificationScreen(email: state.extra as String),
-    ),
-    GoRoute(
-        path: createNewPassword,
+  static final routers = GoRouter(
+    routes: [
+      GoRoute(path: splash, builder: (context, state) => SplashScreen()),
+      GoRoute(path: welcome, builder: (context, state) => WelcomeScreen()),
+      GoRoute(path: login, builder: (context, state) => LoginScreen()),
+      GoRoute(path: register, builder: (context, state) => RegisterScreen()),
+      GoRoute(
+          path: forgotPassword,
+          builder: (context, state) => ForgotPasswordScreen()),
+      GoRoute(
+        path: otpVerification,
         builder: (context, state) =>
-            CreateNewPasswordScreen(pinCode: state.extra as String)),
-    GoRoute(
-        path: passwordChanged,
-        builder: (context, state) => PasswordChangedScreen()),
-    GoRoute(path: mainScreen, builder: (context, state) => MainScreen()),
-    GoRoute(
-        path: bookDetails,
-        builder: (context, state) => BookDetailsScreen(
-              book: state.extra as Product,
-            )),
-  ]);
+            OtpVerificationScreen(email: state.extra as String),
+      ),
+      GoRoute(
+          path: createNewPassword,
+          builder: (context, state) =>
+              CreateNewPasswordScreen(pinCode: state.extra as String)),
+      GoRoute(
+          path: passwordChanged,
+          builder: (context, state) => PasswordChangedScreen()),
+      GoRoute(path: mainScreen, builder: (context, state) => MainScreen()),
+      GoRoute(
+          path: bookDetails,
+          builder: (context, state) => BookDetailsScreen(
+                book: state.extra as Product,
+              )),
+      GoRoute(
+          path: editProfile, builder: (context, state) => EditProfileScreen()),
+      GoRoute(
+          path: resetPassword,
+          builder: (context, state) => ResestPasswordScreen()),
+      GoRoute(path: changeTheme, builder: (context, state) => ThemeScreen()),
+    ],
+  );
 }

@@ -27,7 +27,7 @@ class DioProvider {
 
   static Future<Response> post({
     required String endPoint,
-    required Map<String, dynamic> body,
+    Map<String, dynamic>? body,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) async {

@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'package:bookia/features/auth/data/model/response/user_response/user.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefs {
   static late SharedPreferences prefs;
   static const String kToken = 'kToken';
   static const String kUserInfo = 'kUserInfo';
-
+  static const String kThemeMode = 'kThemeMode';
   static Future<void> init() async {
     prefs = await SharedPreferences.getInstance();
   }
@@ -36,7 +37,26 @@ class SharedPrefs {
 
   static String getString(String key) => prefs.getString(key) ?? '';
 
-  static Future<void> remove(String key) async {
-    await prefs.remove(key);
+  static Future<void> removeUserData() async {
+    await prefs.remove(kToken);
+    await prefs.remove(kUserInfo);
+  }
+
+  static setTheme({required ThemeMode themeMode}) {
+    setString(kThemeMode, themeMode.name);
+  }
+
+  static ThemeMode get getTheme {
+    final themeName = getString(kThemeMode);
+    switch (themeName) {
+      case 'light':
+        return ThemeMode.light;
+      case 'dark':
+        return ThemeMode.dark;
+      case 'system':
+        return ThemeMode.system;
+      default:
+        return ThemeMode.light;
+    }
   }
 }

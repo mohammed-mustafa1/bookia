@@ -15,4 +15,8 @@ class AppConstatns {
   static const addToCartEndPoint = 'add-to-cart';
   static const removeFromCartEndPoint = 'remove-from-cart';
   static const updateCartEndPoint = 'update-cart';
+  static const showProfileEndPoint = 'profile';
+  static const updatePasswordEndPoint = 'update-profile';
+  static const updateProfileEndPoint = '/update-profile';
+  static const logoutEndPoint = 'logout';
 }
