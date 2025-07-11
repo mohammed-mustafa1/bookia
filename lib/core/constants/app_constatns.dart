@@ -19,4 +19,5 @@ class AppConstatns {
   static const updatePasswordEndPoint = 'update-profile';
   static const updateProfileEndPoint = '/update-profile';
   static const logoutEndPoint = 'logout';
+  static const allProductsEndPoint = 'products';
 }

@@ -46,9 +46,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             BackIconButton(
               onPressed: () => context.pop(),
             ),
-            Spacer(),
+            Spacer(flex: 2),
             Text('Edit Profile'),
-            Spacer(),
+            Spacer(flex: 3),
           ],
         ),
         automaticallyImplyLeading: false,

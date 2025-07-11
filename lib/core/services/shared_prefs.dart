@@ -24,8 +24,11 @@ class SharedPrefs {
     await setString(kUserInfo, userString);
   }
 
-  static User getUserInfo() {
+  static User? getUserInfo() {
     var userString = getString(kUserInfo);
+    if (userString.isEmpty || userString == '') {
+      return null;
+    }
     var userJson = json.decode(userString);
     var user = User.fromJson(userJson);
     return user;
@@ -39,6 +42,7 @@ class SharedPrefs {
 
   static Future<void> removeUserData() async {
     await prefs.remove(kToken);
+    await prefs.remove(kThemeMode);
     await prefs.remove(kUserInfo);
   }
 

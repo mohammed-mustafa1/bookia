@@ -1,5 +1,7 @@
 import 'package:bookia/components/buttons/main_button.dart';
 import 'package:bookia/core/constants/app_assets.dart';
+import 'package:bookia/core/extensions/theme.dart';
+import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/utils/text_styles.dart';
 import 'package:bookia/features/home/data/model/best_seller_response/product.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -51,7 +53,11 @@ class WishListItemWidget extends StatelessWidget {
                 children: [
                   Expanded(
                       child: Text(book.name ?? '',
-                          style: TextStyles.getTitle(color: Color(0xff606060)),
+                          style: TextStyles.getTitle(
+                            color: context.brightness == Brightness.light
+                                ? Color(0xff606060)
+                                : AppColors.whiteColor,
+                          ),
                           maxLines: 2)),
                   GestureDetector(
                       onTap: () => onRemove(book.id ?? 0),

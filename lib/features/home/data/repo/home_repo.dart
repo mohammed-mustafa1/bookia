@@ -1,6 +1,7 @@
 import 'package:bookia/core/constants/app_constatns.dart';
 import 'package:bookia/core/errors/failures.dart';
 import 'package:bookia/core/services/dio_provider.dart';
+import 'package:bookia/features/home/data/model/all_products_response/all_products_response.dart';
 import 'package:bookia/features/home/data/model/best_seller_response/best_seller_response.dart';
 import 'package:bookia/features/home/data/model/slider_response/slider_response.dart';
 import 'package:dartz/dartz.dart';
@@ -26,6 +27,20 @@ class HomeRepo {
       var response =
           await DioProvider.get(endPoint: AppConstatns.bestSellerEndPoint);
       return right(BestSellerResponse.fromJson(response.data));
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioException(e));
+      } else {
+        return left(ServerFailure(message: e.toString()));
+      }
+    }
+  }
+
+  static Future<Either<Failure, AllProductsResponse>> getAllProducts() async {
+    try {
+      var response =
+          await DioProvider.get(endPoint: AppConstatns.allProductsEndPoint);
+      return right(AllProductsResponse.fromJson(response.data));
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(e));

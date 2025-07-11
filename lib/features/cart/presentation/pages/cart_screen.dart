@@ -79,7 +79,13 @@ class CartScreen extends StatelessWidget {
                         Gap(20),
                         MainButton(
                             onTap: () {
-                              showSuccessDialog(context);
+                              showLoadingDialog(context);
+                              Future.delayed(Duration(seconds: 3)).then(
+                                (value) {
+                                  context.pop();
+                                  showSuccessDialog(context);
+                                },
+                              );
                             },
                             text: 'Checkout'),
                       ],

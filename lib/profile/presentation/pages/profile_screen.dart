@@ -5,6 +5,7 @@ import 'package:bookia/core/extensions/theme.dart';
 import 'package:bookia/core/routers/app_routers.dart';
 import 'package:bookia/core/services/shared_prefs.dart';
 import 'package:bookia/core/utils/app_colors.dart';
+import 'package:bookia/features/auth/data/model/response/user_response/user.dart';
 import 'package:bookia/profile/presentation/cubit/profile_cubit/profile_cubit.dart';
 import 'package:bookia/profile/presentation/cubit/profile_cubit/profile_state.dart';
 import 'package:bookia/profile/presentation/widgets/profile_details_section.dart';
@@ -30,7 +31,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
           var cubit = context.read<ProfileCubit>();
-
           return Scaffold(
             appBar: AppBar(
               centerTitle: true,
@@ -38,11 +38,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               title: Text('Profile'),
               actions: [
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     showLoadingDialog(context);
-                    cubit.logout().then((_) {
-                      context.pushToBase(AppRouter.mainScreen);
-                    });
+                    await cubit.logout();
+                    context.pushToBase(AppRouter.welcome);
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -65,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 spacing: 16,
                 children: [
                   ProfileDetailsSection(
-                    user: SharedPrefs.getUserInfo(),
+                    user: SharedPrefs.getUserInfo() ?? User(),
                   ),
                   Gap(4),
                   ProfileItem(text: 'My Orders', onTap: () {}),
@@ -81,14 +80,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onTap: () {
                         context.pushTo(AppRouter.resetPassword);
                       }),
-                  ProfileItem(text: 'FAQ', onTap: () {}),
-                  ProfileItem(text: 'Contact Us', onTap: () {}),
-                  ProfileItem(text: 'Privacy & Terms', onTap: () {}),
                   ProfileItem(
                       text: 'Theme Mode',
                       onTap: () {
                         context.push(AppRouter.changeTheme);
                       }),
+                  ProfileItem(text: 'FAQ', onTap: () {}),
+                  ProfileItem(text: 'Contact Us', onTap: () {}),
+                  ProfileItem(text: 'Privacy & Terms', onTap: () {}),
                 ],
               ),
             ),

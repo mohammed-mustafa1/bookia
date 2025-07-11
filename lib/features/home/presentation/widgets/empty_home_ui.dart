@@ -1,3 +1,4 @@
+import 'package:bookia/core/extensions/theme.dart';
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/utils/text_styles.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -14,8 +15,12 @@ class EmptyHomeUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.grey.shade300,
-      highlightColor: Colors.grey.shade100,
+      baseColor: context.brightness == Brightness.light
+          ? Colors.grey.shade300
+          : AppColors.darkColor,
+      highlightColor: context.brightness == Brightness.light
+          ? Colors.grey.shade100
+          : AppColors.darkGrayColor,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

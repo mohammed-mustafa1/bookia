@@ -1,10 +1,11 @@
 import 'package:bookia/components/buttons/main_button.dart';
 import 'package:bookia/core/constants/app_assets.dart';
+import 'package:bookia/core/extensions/navigation.dart';
+import 'package:bookia/core/routers/app_routers.dart';
 import 'package:bookia/core/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 
 showSuccessDialog(context) => showDialog(
       barrierDismissible: false,
@@ -36,7 +37,7 @@ showSuccessDialog(context) => showDialog(
               ),
               MainButton(
                   onTap: () {
-                    context.pop();
+                    context.pushTo(AppRouter.mainScreen);
                   },
                   text: ' Back To Home'),
               Spacer(flex: 4),

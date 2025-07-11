@@ -1,5 +1,7 @@
 import 'package:bookia/components/snack_bars/main_snack_bar.dart';
 import 'package:bookia/core/constants/app_assets.dart';
+import 'package:bookia/core/extensions/theme.dart';
+import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/utils/text_styles.dart';
 import 'package:bookia/features/cart/data/model/cart_response/cart_item.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -51,7 +53,11 @@ class CartItemWidget extends StatelessWidget {
                 children: [
                   Expanded(
                       child: Text(book.itemProductName ?? '',
-                          style: TextStyles.getTitle(color: Color(0xff606060)),
+                          style: TextStyles.getTitle(
+                            color: context.brightness == Brightness.light
+                                ? Color(0xff606060)
+                                : AppColors.whiteColor,
+                          ),
                           maxLines: 2)),
                   GestureDetector(
                       onTap: () => onRemoveItem(book.itemId ?? 0),

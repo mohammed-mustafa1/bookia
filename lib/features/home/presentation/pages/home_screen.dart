@@ -2,6 +2,7 @@ import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/extensions/theme.dart';
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/utils/text_styles.dart';
+import 'package:bookia/features/home/data/model/best_seller_response/product.dart';
 import 'package:bookia/features/home/presentation/cubit/home_cubit.dart';
 import 'package:bookia/features/home/presentation/cubit/home_state.dart';
 import 'package:bookia/features/home/presentation/widgets/best_seller_grid_view.dart';
@@ -60,16 +61,9 @@ class HomeScreen extends StatelessWidget {
                       child: HomeSlider(sliders: cubit.sliders),
                     ),
                     Gap(32),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text('Best Sellers',
-                          style: TextStyles.getHeadLine2()),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child:
-                          BestSellerGridView(products: cubit.bestSellersList),
-                    )
+                    BestSellersSection(products: cubit.bestSellersList),
+                    Gap(32),
+                    AllProductsSection(products: cubit.allproducts)
                   ],
                 ),
               );
@@ -79,6 +73,57 @@ class HomeScreen extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+}
+
+class BestSellersSection extends StatelessWidget {
+  const BestSellersSection({
+    super.key,
+    required this.products,
+  });
+
+  final List<Product> products;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Text('Best Sellers', style: TextStyles.getHeadLine2()),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: BestSellerGridView(products: products),
+        ),
+      ],
+    );
+  }
+}
+
+class AllProductsSection extends StatelessWidget {
+  const AllProductsSection({
+    super.key,
+    required this.products,
+  });
+
+  final List<Product> products;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Text('All Products', style: TextStyles.getHeadLine2()),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: BestSellerGridView(products: products),
+        ),
+      ],
     );
   }
 }
